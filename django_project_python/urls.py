@@ -19,19 +19,21 @@ from django_app.views import blogs, about_site, dynamic_blog, add_comment, creat
     users_personal_page, user_registration, change_password, login, logout
 
 urlpatterns = [
-    path('blogs/', blogs),  # Домашняя страница, потенциально, однажды там будут блоги :)
+    path('blogs/', blogs, name='home'),  # Домашняя страница, потенциально, однажды там будут блоги :)
     path('about/', about_site),  # Потенциально тут будет страница с описанием нашего блога.
-    path('', blogs),  # должен отрабатывать тот же обработчик, что и для /blogs/
-    path('<slug:slug>', dynamic_blog),
+    path('', blogs, name='home'),  # должен отрабатывать тот же обработчик, что и для /blogs/
+    path('<slug:slug>', dynamic_blog, name='dynamic_blog'),
     # Потенциальная страница для просмотра одного блога. Динамический контент, который потенциально будет ходить в базу данных
 
     path('<slug:slug>/comment/', add_comment),  # Урл для добавления коментария к посту.
-    path('create/', create_new_post),  # Создание нового поста
+    path('create/', create_new_post, name='create_post'),  # Создание нового поста
     path('<slug:slug>/update/', update_post),  # Обновление существующего поста
     path('<slug:slug>/delete/', delete_post),  # Удаление поста
     path('profile/<str:username>/', users_personal_page),  # Личная страница пользователя
     path('change_password/', change_password),  # Страничка для смены пароля
-    path('register/', user_registration),  # Регистрация пользователя
-    path('login/', login),  # Логин
+    path('register/', user_registration, name='register'),  # Регистрация пользователя
+    path('login/', login, name='login'),  # Логин
     path('logout/', logout),  # Логаут
+
 ]
+

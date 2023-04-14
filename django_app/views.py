@@ -1,8 +1,9 @@
 from django.http import HttpResponse
+from django.shortcuts import render
 
 
 def blogs(request):
-    return HttpResponse("it`s blogs")
+    return render(request, 'home_page.html')
 
 
 def about_site(request):
@@ -10,7 +11,7 @@ def about_site(request):
 
 
 def dynamic_blog(request, slug):
-    return HttpResponse(f"show one dynamic blogs {slug}")
+    return render(request, 'dynamic_blog.html', {"slug": slug})
 
 
 def add_comment(request, slug):
@@ -18,7 +19,7 @@ def add_comment(request, slug):
 
 
 def create_new_post(request):
-    return HttpResponse("create new post")
+    return render(request, 'create_new_blog.html')
 
 
 def update_post(request, slug):
@@ -26,7 +27,7 @@ def update_post(request, slug):
 
 
 def delete_post(request, slug):
-    return HttpResponse(f"{slug} delate post")
+    return HttpResponse(f"{slug} delete post")
 
 
 def users_personal_page(request, username):
@@ -38,11 +39,11 @@ def change_password(request):
 
 
 def user_registration(request):
-    return HttpResponse("User registration")
+    return render(request, 'register.html')
 
 
 def login(request):
-    return HttpResponse("login")
+    return render(request, 'login.html')
 
 
 def logout(request):
