@@ -1,0 +1,39 @@
+{% extends 'home_page.html' %}
+{% block content %}
+<br>
+
+<style>
+    input {
+        border: none;
+        border-bottom: 1px solid rgb(231,229,227);
+    }
+    .wrapper {
+        margin-bottom: 10px;
+    }
+    .wrapper label i {
+    margin-right: 5px;
+    display: inline-block;
+    width: 10px;
+}
+</style>
+
+<div style="padding: 20px; background-color: powderblue">
+    <h1><span class="register">Registration:</span></h1>
+</div>
+<br>
+<div class="wrapper">
+    <label>Enter username: <input  id="username" type="text" required/></label>
+</div>
+<div class="wrapper">
+    <label>Enter email: <input id="email" type="email" required/></label>
+</div>
+<div class="wrapper">
+    <label>Enter password: <input id="password" type="password" required/></label>
+</div>
+<div class="wrapper">
+    <label>Enter confirm password: <input id="confirm password" type="password" required/></label>
+</div>
+<div>
+    <button type = "submit" class="btn-primary border-0" > Ok </button> <button type = "submit" class="btn-danger border-0"> Esc </button>
+</div>
+{% endblock %}
