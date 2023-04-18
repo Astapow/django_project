@@ -5,7 +5,7 @@ from django.db import models
 class Topic(models.Model):
     title = models.CharField(max_length=100)
     description = models.CharField(null=True, blank=True)
-    author = models.ManyToManyField(User)
+    subscribers = models.ManyToManyField(User)
 
     def __str__(self):
         return self.title
@@ -27,7 +27,7 @@ class BlogPost(models.Model):
 class Comment(models.Model):
     created_at = models.DateField(auto_now=True)
     content = models.TextField(max_length=100)
-    blogPost = models.ForeignKey(BlogPost, on_delete=models.CASCADE, null=True)
+    blog_post = models.ForeignKey(BlogPost, on_delete=models.CASCADE, null=True)
     author = models.ForeignKey(User, on_delete=models.CASCADE)
 
     def __str__(self):
