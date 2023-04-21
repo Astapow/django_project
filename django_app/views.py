@@ -1,9 +1,10 @@
 from django.http import HttpResponse
 from django.shortcuts import render
+from django_app.models import BlogPost, Comment
 
 
 def blogs(request):
-    return render(request, 'home_page.html')
+    return render(request, 'home_page.html', {'blog_post': BlogPost.objects.all()})
 
 
 def about_site(request):
@@ -11,7 +12,9 @@ def about_site(request):
 
 
 def dynamic_blog(request, slug):
-    return render(request, 'dynamic_blog.html', {"slug": slug})
+    post = BlogPost.objects.get(slug=slug)
+    comments = Comment.objects.filter(blog_post=post)
+    return render(request, 'dynamic_blog.html', {"slug": slug, 'post': post, 'comment': comments})
 
 
 def add_comment(request, slug):

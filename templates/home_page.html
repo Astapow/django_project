@@ -33,6 +33,13 @@
 </nav>
 <div style="background-color: blanchedalmond">
     {% block content %}
+        {% for blog in blog_post %}
+            <a class="nav-link active" aria-current="page" href="{{ blog.slug }}">
+                title: {{ blog.title }} | content: {{ blog.content }} |
+                from author: {{ blog.author.username }} | categories{{ blog.categories }}</a>
+
+            <br>
+        {% endfor %}
     {% endblock %}
 </div>
 </body>

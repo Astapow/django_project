@@ -1,5 +1,27 @@
 {% extends 'home_page.html' %}
 
 {% block content %}
-<div style="padding: 20px; background-color: powderblue"> Dynamic blog!</div>
+<div style="padding: 20px; background-color: powderblue">
+    <h1> Dynamic blog! </h1>
+    <br>
+    <br>
+        Title: {{ post.title }}
+    <br>
+        Content: {{ post.content }}
+    <br>
+        Categories: {{ post.categories }}
+    <br>
+        by author < {{ post.author }} >
+    <br>
+        {{ post.created_at }}
+
+    <h2>Comments</h2>
+        <p>Post comments: </p>
+        {% for com in comment %}
+           Content: {{ com.content }}
+            <br>
+           by author:< {{ com.author }} >
+
+        {% endfor %}
+</div>
 {% endblock %}
