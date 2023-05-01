@@ -1,15 +1,6 @@
 from django.contrib.auth.models import User
 from django.db import models
 from django.utils.text import slugify
-from django.utils.translation import gettext as _
-
-TOPIC_CHOICES = (
-    (1, _("Not selected")),
-    (2, _("Sport")),
-    (3, _("Fishing")),
-    (4, _("Tourism")),
-    (5, _("Other"))
-)
 
 
 class Topic(models.Model):
@@ -18,7 +9,7 @@ class Topic(models.Model):
     subscribers = models.ManyToManyField(User)
 
     def __str__(self):
-        return self.title
+        return f' {self.title} {self.subscribers}'
 
 
 class BlogPost(models.Model):
@@ -29,11 +20,10 @@ class BlogPost(models.Model):
     updated_at = models.DateTimeField(auto_now_add=True)
     topic = models.ManyToManyField(Topic)
     author = models.ForeignKey(User, on_delete=models.CASCADE)
-    categories = models.IntegerField(choices=TOPIC_CHOICES, default=1)
 
     def __str__(self):
         return f"\
-        title: {self.title} content: {self.content} author: {self.author.username} categories: {self.categories}"
+        title: {self.title} content: {self.content} author: {self.author.username} "
 
     def save(self, *args, **kwargs):
         if not self.id:
@@ -44,13 +34,11 @@ class BlogPost(models.Model):
 class Comment(models.Model):
     created_at = models.DateField(auto_now=True)
     content = models.TextField(max_length=100)
-    blog_post = models.ForeignKey(BlogPost, on_delete=models.CASCADE, null=True, related_name='get_post')
+    blog_post = models.ForeignKey(BlogPost, on_delete=models.CASCADE, null=True)
     author = models.ForeignKey(User, on_delete=models.CASCADE)
 
     def __str__(self):
         return f"{self.content} {self.author.username} {self.blog_post}"
-
-
 
 # ORM
 # user1 = User.objects.first()

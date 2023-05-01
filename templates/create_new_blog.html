@@ -1,33 +1,8 @@
 {% extends 'home_page.html' %}
 {% block content %}
-<style>
-
-    input {
-        border: none;
-        border-bottom: 1px solid rgb(231, 229, 227);
-    }
-    .form-2 label i {
-    margin-right: 5px;
-    display: inline-block;
-    width: 10px;
-}
-</style>
-<form class="form-2">
-    <h1><span class="create_new_blog">Create new blog:</span></h1>
-    <p class="float">
-        <label for="login"><i class="icon-user"></i>Author: </label>
-        <input type="text" name="login" placeholder="user">
-    </p>
-    <p class="float">
-        <label for="title"><i class="title"></i>Title: </label>
-        <input type="text" name="title" placeholder="post title" >
-    </p>
-    <p class="float">
-        <label for="body"><i class="text-body"></i>Body: </label>
-        <input type="text" name="body" placeholder="post content" >
-    </p>
-    <p class="clearfix">
-        <input class="btn-primary border-0" type="submit" name="submit" value="Enter">
-    </p>
-</form>
+    <form method="post" action="{% url 'create_post' %}">
+        {% csrf_token %}
+        {{ form.as_div }}
+        <button type="submit">Save</button>
+    </form>
 {% endblock %}

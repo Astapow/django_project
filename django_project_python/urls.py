@@ -18,7 +18,7 @@ from django.urls import path
 
 from django.contrib import admin
 from django_app.views import blogs, about_site, dynamic_blog, add_comment, create_new_post, update_post, delete_post, \
-    users_personal_page, user_registration, change_password, login, logout
+    users_personal_page, user_registration, change_password, logout_user, login_user
 
 urlpatterns = [
     path('blogs/', blogs, name='home'),  # Домашняя страница, потенциально, однажды там будут блоги :)
@@ -27,16 +27,15 @@ urlpatterns = [
     path('<slug:slug>', dynamic_blog, name='dynamic_blog'),
     # Потенциальная страница для просмотра одного блога. Динамический контент, который потенциально будет ходить в базу данных
 
-    path('<slug:slug>/comment/', add_comment),  # Урл для добавления коментария к посту.
+    path('<slug:slug>/comment/', add_comment, name='comment'),  # Урл для добавления коментария к посту.
     path('create/', create_new_post, name='create_post'),  # Создание нового поста
     path('<slug:slug>/update/', update_post),  # Обновление существующего поста
     path('<slug:slug>/delete/', delete_post),  # Удаление поста
     path('profile/<str:username>/', users_personal_page),  # Личная страница пользователя
     path('change_password/', change_password),  # Страничка для смены пароля
     path('register/', user_registration, name='register'),  # Регистрация пользователя
-    path('login/', login, name='login'),  # Логин
-    path('logout/', logout),  # Логаут
+    path('login/', login_user, name='login'),  # Логин
+    path('logout/', logout_user, name='logout'),  # Логаут
     path('admin/', admin.site.urls),
 
 ]
-
