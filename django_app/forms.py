@@ -24,7 +24,7 @@ class Register(forms.Form):
             raise forms.ValidationError("This username is already taken.")
         return username
 
-    def save(self, commit=True):
+    def save(self):
         user = User.objects.create_user(
             username=self.cleaned_data.get('username'),
             password=self.cleaned_data.get('password'),
@@ -32,8 +32,6 @@ class Register(forms.Form):
             first_name=self.cleaned_data.get('first_name'),
             last_name=self.cleaned_data.get('last_name')
         )
-        if commit:
-            user.save()
         return user
 
 
