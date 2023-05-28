@@ -1,3 +1,5 @@
+import random
+
 from django.contrib.auth.models import User
 from django.db import models
 from django.utils.text import slugify
@@ -27,7 +29,9 @@ class BlogPost(models.Model):
 
     def save(self, *args, **kwargs):
         if not self.id:
-            self.slug = slugify(self.title)
+            base_slug = slugify(self.title)
+            random_number = random.randint(1, 10000)
+            self.slug = f"{base_slug}-{random_number}"
         super(BlogPost, self).save(*args, **kwargs)
 
 
