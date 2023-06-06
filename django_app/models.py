@@ -30,7 +30,7 @@ class BlogPost(models.Model):
     def save(self, *args, **kwargs):
         if not self.id:
             base_slug = slugify(self.title)
-            random_number = random.randint(1, 10000)
+            random_number = random.randint(1, 100000)
             self.slug = f"{base_slug}-{random_number}"
         super(BlogPost, self).save(*args, **kwargs)
 

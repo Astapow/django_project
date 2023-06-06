@@ -20,8 +20,6 @@ class UserRegistrationSerializer(serializers.ModelSerializer):
 
 
 class TopicSerializer(serializers.ModelSerializer):
-    subscribers = serializers.PrimaryKeyRelatedField(read_only=True)
-
     class Meta:
         model = Topic
         fields = ['id', 'title', 'description', 'subscribers']
