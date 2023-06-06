@@ -2,7 +2,7 @@ from django.contrib.auth.models import User
 from rest_framework import permissions
 from rest_framework.viewsets import ModelViewSet
 
-from django_app.api.permissions import IsAdminOrReadOnlyPermission
+from django_app.api.permissions import IsAdminOrReadOnlyPermission, IsOwnerOrAdminOrReadOnly
 from django_app.api.serializers import TopicSerializer, BlogPostSerializer, CommentSerializer, \
     UserRegistrationSerializer
 from django_app.models import Topic, Comment, BlogPost
@@ -39,7 +39,7 @@ class TopicModelViewSet(ModelViewSet):
 
 
 class BlogPostModelViewSet(ModelViewSet):
-    permission_classes = [permissions.IsAuthenticatedOrReadOnly]
+    permission_classes = [IsOwnerOrAdminOrReadOnly, ]
     serializer_class = BlogPostSerializer
     queryset = BlogPost.objects.all()
 
